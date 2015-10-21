@@ -15,7 +15,7 @@ qsort :: Ord a => [a] -> [a]
 qsort []     = []
 qsort (x:xs) = qsort1 (x:xs)
 
--- uniq reverse sort
+-- SP  uniq reverse sort
 qsort0 []     = qsort [] 
 qsort0 (x:xs) = qsort0 larger ++ [x] ++ qsort0 smaller
                 where larger  = [a | a <- xs , a > x]
@@ -29,7 +29,7 @@ qsort1 (x:xs) = qsort1 larger ++ [x] ++ qsort1 smaller
 
 
 
---good types bu the result is all wrong
+--good types but the result is all wrong
 --due to the sublists being reversed at each stage
 qsort2 []     = qsort []
 qsort2 (x:xs) = reverse (qsort2 smaller ++ [x] ++ qsort2 larger)
@@ -38,7 +38,7 @@ qsort2 (x:xs) = reverse (qsort2 smaller ++ [x] ++ qsort2 larger)
 
 
 -- seems to produce an infinite result
--- smaller always empty 
+-- smaller always has the min val
 qsort3 [] = qsort  [] 
 qsort3 xs = qsort3 larger ++ qsort3 smaller ++ [x]
             where x       = minimum xs
