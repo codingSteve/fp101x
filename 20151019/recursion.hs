@@ -17,9 +17,6 @@ concat0 [] = []
 concat0 (a : as) | null as   = a
                  | otherwise = a ++ concat0 as
 
-
-
-
 replicate0 :: Int -> a -> [a]
 
 replicate0 0 x = [] 
@@ -39,23 +36,23 @@ elem0 n (x:xs) | n == x    = True
 
 
   
--- | expects two sorted lists
 merge0 :: Ord a => [a] -> [a] -> [a]
+halve0 ::          [a] -> ([a],[a])
+msort0 :: Ord a => [a] -> [a]
 
-merge0 [] xs   = xs
-merge0 xs []   = xs
-
+merge0 [] xs     = xs
+merge0 xs []     = xs
+-- | expects two sorted lists
+-- but because we filter the second one like qsort
+-- and gradually reduce the first 
+-- we may not need to have them sorted at all
+-- if they are both non empty
 merge0 (x:xs) ys = merge0 xs ( smaller_y ++ [x] ++ larger_y)
                    where smaller_y = [sy | sy <- ys, sy <= x]
                          larger_y  = [ly | ly <- ys, ly >  x]
 
-
-halve0  :: [a] -> ([a],[a])
-
 halve0 xs  = (take h xs, drop h xs)
              where h = length xs `div` 2
-
-msort0  :: Ord a => [a] -> [a]
 
 msort0 [ ] = [ ]
 msort0 [x] = [x]
@@ -71,18 +68,15 @@ msort0 xs  = merge0 ( msort0 first) (msort0 second)
  -
  -}
 
-sum0 :: Num a => [a] -> a
-
-sum0 []     = 0
-sum0 (x:xs) = x + sum0 xs
-
+sum0  :: Num a => [a] -> a
+last0 :: [a] -> a
 take0 :: Int -> [a] -> [a]
 
-take0 0 _          = []
-take0 (n+1) (x:xs) = x : take0 n xs
+sum0 []                  = 0
+sum0 (x:xs)              = x + sum0 xs
 
-
-last0 :: [a] -> a
+take0 0 _                = []
+take0 (n+1) (x:xs)       = x : take0 n xs
 
 last0 (x:xs) | null xs   = x
              | otherwise = last0 xs
