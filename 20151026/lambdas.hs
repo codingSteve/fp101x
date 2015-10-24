@@ -61,3 +61,17 @@ dropWhile0 p (x:xs) | p x       = dropWhile0 p xs
                     | otherwise = x : xs
 
 
+
+map0 :: (a -> b) -> [a] -> [b]
+
+map0 f xs = foldr (\y ys -> f y : ys ) [] xs
+
+
+filter0 :: (a -> Bool) -> [a] -> [a]
+
+-- | making a list and concatenating isn't very slick
+-- 
+filter0 p xs = foldr (\y ys -> [a | a <- [y], p y ] ++ ys) [] xs
+
+dec2Int :: [Int] -> Int 
+dec2int xs = foldl (\c x -> c*10  +x) 0 xs
