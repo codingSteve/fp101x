@@ -9,7 +9,7 @@ addone :: Integer -> Integer
 addone = (\x -> x+1)
 
 
-g x y  = x^2 + 5*y +3
+g( x, y)  = x^2 + 5*y +3
 
 
 {-
@@ -74,4 +74,16 @@ filter0 :: (a -> Bool) -> [a] -> [a]
 filter0 p xs = foldr (\y ys -> [a | a <- [y], p y ] ++ ys) [] xs
 
 dec2Int :: [Int] -> Int 
-dec2int xs = foldl (\c x -> c*10  +x) 0 xs
+dec2Int xs = foldl (\c x -> c*10  +x) 0 xs
+
+
+
+curry0 ::  ((a,b) -> c) -> a -> b -> c
+curry0 f  = (\x y -> f(x,y))
+
+
+uncurry0 :: (a -> b -> c) -> (a,b) -> c
+
+uncurry0 f = (\(x,y) -> f x y)
+
+
