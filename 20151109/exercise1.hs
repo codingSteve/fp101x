@@ -5,6 +5,8 @@ l2 = null
 
 l3 = [1,2,3,4,5,6,7,8,9,0]
 
+ls = [l, l3]
+
 
 {--
  -
@@ -17,8 +19,11 @@ safetail1 []     = []
 safetail1 (_:xs) = xs
 
 -- bug here doing tail twice effectively
-safetail2 (_:xs) | null xs   = []
-                 | otherwise = tail xs
+-- and pattern matching issue
+--{
+--safetail2 (_:xs) | null xs   = []
+--                 | otherwise = tail xs
+--}                 
 
 safetail3 xs     | null xs   = []
                  | otherwise = tail xs
@@ -40,4 +45,4 @@ safetail7 = \ xs -> case xs of []     -> []
                                (_:xs) -> xs
 
 
-
+fs = [ safetail0, safetail1, safetail3,  safetail5, safetail7 ]
