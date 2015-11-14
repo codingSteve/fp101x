@@ -16,15 +16,8 @@ remove3 n xs = take n xs ++ drop (n+1) xs
 
 
 
-fs = [  (0, remove0),
-        (1, remove1),
-        (2, remove2),
-        (3, remove3)
-     ] 
-
-
+fs = [  (0, remove0), (1, remove1), (2, remove2), (3, remove3) ] 
 l = [0,1,2,3,4,5,6,7,8,9]
-
 bs:: [(Int, [Integer],[Integer])]
 bs = [ (0,  l, [  1,2,3,4,5,6,7,8,9]), 
        (1,  l, [0,  2,3,4,5,6,7,8,9]),
@@ -39,10 +32,7 @@ bs = [ (0,  l, [  1,2,3,4,5,6,7,8,9]),
        (19, l, [0,1,2,3,4,5,6,7,8,9])
      ]
 
-
 t1 f (a,b,c) = (f a b) == c
-
 t2 f         = and (map (\(a,b,c) -> t1 f (a,b,c)) bs)
-
 tests        = map (\(n,f) -> (n,t2 f)) fs
 
